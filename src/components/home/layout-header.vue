@@ -8,7 +8,7 @@
       <!-- 用户头像 -->
       <img class="head-img" :src="userInfo.photo?userInfo.photo : defaultImg" />
       <!-- 功能键 个人中心 退出登录 -->
-      <el-dropdown>
+      <el-dropdown trigger="click" @command="handleMenuItem">
 
         <span class="el-dropdown-link">
           {{userInfo.name}}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -36,13 +36,31 @@ return {
 }
 },
   methods:{
+      handleMenuItem(command){
+        if(command ==='account'){
+            //个人中心
+        }else if(command ==='git'){
+          //跳转git
+          window.location.href='https://github.com/MrxinL/toutiao'
+        }else{
+          //退出  清除 token信息   编程式导航到登录页
+
+
+          window.localStorage.clear()
+          this.$router.push('/login')
+        }
+      },
+
+
+
+
       getUserInfo(){
         this.$axios({
           url:'/user/profile'
         }).then(result =>{
 
           // console.log(result.data.data)
-          this.userInfo=result.data.data
+          this.userInfo=result.data
         })
       }
   },

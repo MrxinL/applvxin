@@ -24,5 +24,9 @@ module.exports = {
         'semi': 0
 
 
-    }
+    },
+    // "parserOptions": {
+    //     "parser": "babel-eslint",
+    //  }
+
 };

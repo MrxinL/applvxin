@@ -94,14 +94,24 @@ export default {
     };
   },
   methods:{
+
+    //设置user-token 整合了 在axios-config。js中统一体现
     login(){
       this.$refs.loginForm.validate(isok=>{
+
         if(isok){
            //请求axios 
            this.$axios({
              url:'/authorizations',
              method: 'post',
              data : this.loginForm
+           }).then(result=>{
+             //请求成功后，提示登录成功 跳转 token
+             window.localStorage.setItem('user-token',result.data.token)
+           //编程式导航
+           this.$router.push('/')
+           
+           
            })
         }
         else {

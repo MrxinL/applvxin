@@ -94,23 +94,30 @@ export default {
     };
   },
   methods:{
-    login(){
-      this.$refs.loginForm.validate(isok=>{
-        if(isok){
-           //请求axios 
-           this.$axios({
-             url:'/registers',
-             method: 'post',
-             data : this.loginForm
-           })
-        }
-        else {
-          //提示
+ login () {
+      // 拿到数据  , 发起请求(axios)
+      this.$refs.loginForm.validate(isOK => {
+        if (isOK) {
+          // 请求axios
+          this.$axios({
+            url: '/register',
+            method: 'post',
+            data: this.loginForm
+          }).then(result => { // 请求成功后 , 提示登陆成功 并跳转  token
+            console.log(result)
+            window.localStorage.setItem('user-token', result.data.data.token)
+            // 编程式导航
+            this.$router.push('/')
+          }).catch(() => {
+            this.$message({
+              message: '手机号或验证码错误',
+              type: 'warning'
+            })
+          })
         }
       })
     }
   }
-
 
 };
 </script>
