@@ -4,9 +4,9 @@
                 首页
         </el-breadcrumb-item>
 
-        <el-breadcrumn-item>  
+        <el-breadcrumb-item >  
           <slot name="title"></slot>
-        </el-breadcrumn-item>
+        </el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 

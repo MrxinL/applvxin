@@ -96,6 +96,7 @@ export default {
   methods:{
 
     //设置user-token 整合了 在axios-config。js中统一体现
+    
     login(){
       this.$refs.loginForm.validate(isok=>{
 

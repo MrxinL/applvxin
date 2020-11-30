@@ -51,7 +51,34 @@ export default {
         }
       },
       methods:{
-            changePage(){},
+        formatter(row){
+          return row.comment_status ?'正常' : '关闭'
+        },
+        openOrClose(row){
+          const mess = row.comment_status ? '关闭' :'打开'
+          this.$confirm(`是否要${mess}评论?`,`提示`).then(()=>{
+            this.$axios({
+              method:'put',
+              url:'/comments/status',
+              params:{
+                article_id:row.id//唯一标识
+              },
+              data:{
+                allow_comment:!row.comment_status
+              }
+
+            })
+          })
+          .then(()=>{
+            this.getComments()
+          })
+        },
+
+            changePage(newPage){
+              //console.log(newPage)
+            this.page.page = newPage
+             this.getComments()
+            },
             getComments(){
               this.loading=true
               this.$axios({
@@ -61,12 +88,12 @@ export default {
                   page:this.page.page,
                   per_page:this.page.pageSize
 
-                }.then(result =>{
+                }
+                }).then(result =>{
                     this.loading=false
-                    this.list=result.data.result
+                    this.list=result.data.results
                     this.page.total=result.data.total_count
-                })
-              })
+              })//拿到数据渲染上去
             }
       },
       created(){

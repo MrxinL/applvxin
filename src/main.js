@@ -5,7 +5,7 @@ import Element from 'element-ui'
 import './style/index.less'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from './utils/axios.config'
-import  Conponent from './components'
+import  Conponent from './components/index.js'
 
 
 // axios.defaults.baseURL ='http://localhost:3000'
