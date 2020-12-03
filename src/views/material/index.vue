@@ -11,11 +11,12 @@
       <el-tabs v-model="activeName" @tab-click="changeTab">
         <el-tab-pane label="全部素材" name="all">
           <div class="card-list">
-            <img src="" alt="">
+           
             <el-card class="img-card" v-for="item in list" :key="item.id">
+                <img :src="item.url" alt="">
                 <el-row class="operate" type="flex" align="middle" justify="space-arond">
-                  <i class="el-icon-star-on">收藏</i>
-                  <i class="el-icon-delete-solid">删除</i>
+                  <i @click="collectOrCancel(item)"   class="el-icon-star-on" :style="{color:item.is_collected ? 'red' :''}">收藏</i>
+                  <i @click="delImg(item)"   class="el-icon-delete-solid">删除</i>
                 </el-row>
             </el-card>
           </div>
@@ -31,7 +32,7 @@
         <el-tab-pane label="收藏素材" name="collent">
           <div class="card-list">
             <el-card class="img-card" v-for="item in list" :key="item.id">
-              <img src="item.url" alt="">
+              <img :src="item.url" alt="">
             </el-card>
           </div>
       <el-row type="flex" justify="center">
@@ -71,6 +72,35 @@ export default {
             })
 
           },
+          delImg(item){
+              this.$confirm('确定要删除此素材吗？','提示').then(()=>{
+                  //  确定要删除  请求 删除接口   (delete)  传参  /user/images/id
+                  // 重新加载数据
+                  this.$axios({
+                    url:`/user/images/${item.id}`,
+                    method:'delete'
+                  }).then((()=>{
+                      this.getMaterial()
+                  }))
+              })
+          },
+          collectOrCancel(item){
+            const mess =item.is_collected ? '取消':''
+            this.$confirm(`确定要${mess}收藏这个素材吗?`).then(()=>{
+              //请求接口
+              this.$axios({
+
+                url:`/user/images/${item.id}`,
+                method:'put',
+                data:{
+                  collect:!item.is_collected
+                }
+              }).then(()=>{
+                this.getMaterial()
+              })
+            })
+
+          },
           getMaterial(){
               this.$axios({
                 url:'/user/images',
@@ -80,13 +110,24 @@ export default {
                   collect:this.activeName === 'collect'
                 }
               }).then((result)=>{
-console.log(result)
+                 console.log(result)
+                this.list=result.data.result
+                console.log(result.data,"/*/*/*/")
+                this.page.total=result.data.total_count
               })
           },
           changeTab(){
-
+              //   全部和收藏 来回切换  调用
+              //   activeName 变
+              //page.page
+              this.page.page=1
+              this.getMaterial()
           },
-          changePage(){
+          changePage(newPage){
+            //点击分页
+            this.page.page = newPage
+
+            this.getMaterial()
 
           }
 
