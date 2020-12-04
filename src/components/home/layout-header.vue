@@ -24,8 +24,9 @@
   </el-row>
 </template>
 <script>
-
+import eventsBus from '../../utils/events'
 export default {
+  
   data(){
 return {
   userInfo:{
@@ -65,6 +66,11 @@ return {
       }
   },
   created(){
+    eventsBus.$on('updateuserinfo',()=>{
+       this.getUserInfo()
+    })
+
+    
     this.getUserInfo()
   }
 };

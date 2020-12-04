@@ -4,12 +4,16 @@ import Login from './views/login'
 import Register from './views/register'
 import Home from './views/home'
 import Main from './views/home/main'
-
+import NotFound from './views/404'
 Vue.use(Router)
 
 
 export default new Router({
     routes: [
+        {
+            path:'*',
+            component: NotFound
+        },
         {
             path: '/login',
             component: Login
@@ -39,7 +43,12 @@ export default new Router({
             },{
                 path:'account',
                 component:()=>import('./views/account')
+            },{
+                path:'fansdate',
+                component:()=>import('./views/fans')
             }
+            
+
         
         ]
         }
