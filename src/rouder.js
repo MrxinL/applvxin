@@ -46,6 +46,9 @@ export default new Router({
             },{
                 path:'fansdate',
                 component:()=>import('./views/fans')
+            },{
+                path:'mybanji',
+                component:()=>import('./views/banji')
             }
             
 

@@ -13,7 +13,7 @@
     <el-submenu index="1">
       <template slot="title">
         <i class="el-icon-s-order"></i>
-        <span>内容管理</span>
+        <span>我的业绩</span>
       </template>
       <el-menu-item index="/home/publish">文章发布</el-menu-item>
       <el-menu-item index="/home/articles">内容列表</el-menu-item>
@@ -23,7 +23,17 @@
     <el-submenu index="2">
       <template slot="title">
         <i class="el-icon-s-custom"></i>
-        <span>粉丝管理</span>
+        <span>班级</span>
+      </template>
+      <el-menu-item index="/home/mybanji">我的班级</el-menu-item>
+      <el-menu-item  index="/home/fansinfo">粉丝概况</el-menu-item>
+      <el-menu-item index="/home/fanslist">粉丝列表</el-menu-item>
+      <el-menu-item  index="/home/fansimg">粉丝画像</el-menu-item>
+    </el-submenu>
+        <el-submenu index="3">
+      <template slot="title">
+        <i class="el-icon-s-custom"></i>
+        <span>班级花名册</span>
       </template>
       <el-menu-item index="/home/fansdate">图文数据</el-menu-item>
       <el-menu-item  index="/home/fansinfo">粉丝概况</el-menu-item>

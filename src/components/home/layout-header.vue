@@ -2,7 +2,7 @@
   <el-row type="flex" class="layout-header" justify="space-between">
     <el-col class="left" :span="6">
       <i class="el-icon-s-unfold icon"></i>
-      <span>哈尔滨布卡科技有限公司</span>
+      <span>毕业设计八戒系统</span>
     </el-col>
     <el-col class="right" :span="3">
       <!-- 用户头像 -->
