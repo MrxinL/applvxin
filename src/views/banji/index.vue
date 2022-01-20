@@ -1,5 +1,11 @@
 <template>
 <div>
+    <div class="buju">
+       <el-input v-model="postdata.inputtime" placeholder="时间" class="input"></el-input>
+       <el-input v-model="postdata.inputbanji" placeholder="班级" class="input"></el-input>
+       <el-input v-model="postdata.inputxueke" placeholder="学科" class="input"></el-input>
+       <el-button type="primary" @click="hanleadd">添加</el-button>
+    </div>
     <el-table
     :data="tableData"
     style="width: 100%">
@@ -11,19 +17,22 @@
         <span style="margin-left: 10px">{{ scope.row.time }}</span>
       </template>
     </el-table-column>
-    <el-table-column
+        <el-table-column
       label="班级"
       width="180">
       <template slot-scope="scope">
-        <el-popover trigger="hover" placement="top">
-          <p>姓名: {{ scope.row.name }}</p>
-          <p>住址: {{ scope.row.address }}</p>
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-          </div>
-        </el-popover>
+        <span style="margin-left: 10px">{{ scope.row.name }}</span>
       </template>
     </el-table-column>
+    <el-table-column
+      label="学科"
+      width="180">
+      <template slot-scope="scope">
+        <span style="margin-left: 10px">{{ scope.row.address }}</span>
+      </template>
+    </el-table-column>
+    
+  
     <el-table-column label="操作">
       <template slot-scope="scope">
         <el-button
@@ -32,27 +41,89 @@
         <el-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          @click="handleDelete(scope.row)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
-</div>
+
+    <el-dialog
+    title="提示"
+    :visible.sync="dialogVisible"
+    width="30%">
+    <span>这是一段信息</span>
+    <el-input v-model="tableDataUpdata.time" placeholder="时间" class="input"></el-input>
+    <el-input v-model="tableDataUpdata.name" placeholder="班级" class="input"></el-input>
+    <el-input v-model="tableDataUpdata.address" placeholder="学科" class="input"></el-input>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="dialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="handleClose">确 定</el-button>
+    </span>
+  </el-dialog>
+  </div>
 </template>
 
 <script>
+// import Tanjia from '../../components/common/tianjiabuttone.vue'
 // import dayjs from 'dayjs'
   export default {
+    // components: {
+    //   Tanjia
+    // },
     data() {
       return {
         tableData: '',
+        tableDataUpdata: '',
+        dialogVisible: false,
+        postdata: {
+          inputtime:'',
+          inputbanji: '',
+          inputxueke: ''
+        }
       }
     },
     methods: {
       handleEdit(index, row) {
-        console.log(index, row);
+        this.dialogVisible = true
+        
+        this.$axios({
+          url:'/banjia/update/get',
+          method: 'post',
+          data: {id: row.id}
+        }).then( result => {
+          this.tableDataUpdata = result.data[0]
+        })
       },
-      handleDelete(index, row) {
-        console.log(index, row);
+      handleClose() {
+        this.dialogVisible = false
+        this.$axios({
+          url:'/banjia/update',
+          method: 'post',
+          data: this.tableDataUpdata
+        }).then( result => {
+          this.$message(result)
+          this.handleHuoqu()
+        })
+      },
+      handleDelete(row) {
+          this.$axios({
+          url:'/banjia/delete',
+          method: 'post',
+          data: {id: row.id}
+        }).then( result => {
+          this.$message(result)
+          this.handleHuoqu()
+        })
+      },
+      hanleadd() {
+        this.$axios({
+          url:'/banjia/add',
+          method: 'post',
+          data: this.postdata
+        }).then( result => {
+          this.$message(result)
+          this.handleHuoqu()
+        })
+
       },
       handleHuoqu() {
         this.$axios({
@@ -70,11 +141,24 @@
   }
 </script>
 
-<style>
+<style lang='less'>
 .put {
   width: 200px;
 }
 .button {
   margin-left: 40px;
 }
+.tianjia {
+  position: relative;
+  top: 0px;
+  left: -383px;
+}
+.buju {
+  display: inline-block;
+.input {
+  width: 200px;
+  margin-right: 20px;
+}
+}
+
 </style>
