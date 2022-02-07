@@ -1,7 +1,7 @@
 <template>
 <div class="layout-aside">
   <div class="title">
-    <img src="../../assets/logo_admin.png" alt="">
+    <!-- <img src="../../assets/logo_admin.png" alt=""> -->
   </div>
 <!--  element-ui   el-menu-->
   <el-menu background-color="#323745" text-color="#adafb5" active-text-color="#ffd04b" router>
@@ -15,10 +15,8 @@
         <i class="el-icon-s-order"></i>
         <span>我的业绩</span>
       </template>
-      <el-menu-item index="/home/publish">文章发布</el-menu-item>
-      <el-menu-item index="/home/articles">内容列表</el-menu-item>
-      <el-menu-item index="/home/comment">评论管理</el-menu-item>
-      <el-menu-item index="/home/material">素材管理</el-menu-item>
+      <el-menu-item index="/home/achievementFind">精准查询</el-menu-item>
+      <el-menu-item index="/home/achievementShow">业绩展示</el-menu-item>
     </el-submenu>
     <el-submenu index="2">
       <template slot="title">
@@ -26,19 +24,13 @@
         <span>班级</span>
       </template>
       <el-menu-item index="/home/mybanji">我的班级</el-menu-item>
-      <el-menu-item  index="/home/fansinfo">粉丝概况</el-menu-item>
-      <el-menu-item index="/home/fanslist">粉丝列表</el-menu-item>
-      <el-menu-item  index="/home/fansimg">粉丝画像</el-menu-item>
     </el-submenu>
         <el-submenu index="3">
       <template slot="title">
         <i class="el-icon-s-custom"></i>
         <span>班级花名册</span>
       </template>
-      <el-menu-item index="/home/fansdate">图文数据</el-menu-item>
-      <el-menu-item  index="/home/fansinfo">粉丝概况</el-menu-item>
-      <el-menu-item index="/home/fanslist">粉丝列表</el-menu-item>
-      <el-menu-item  index="/home/fansimg">粉丝画像</el-menu-item>
+       <el-menu-item index="/home/fansdate">花名册管理</el-menu-item>
     </el-submenu>
     <el-menu-item index="/home/account">
       <i class="el-icon-s-tools"></i>
