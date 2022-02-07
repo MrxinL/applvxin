@@ -35,6 +35,9 @@
   
     <el-table-column label="操作">
       <template slot-scope="scope">
+          <el-button
+          size="mini"
+          @click="handleMessage(scope.$index, scope.row)">课程信息</el-button>
         <el-button
           size="mini"
           @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -42,10 +45,21 @@
           size="mini"
           type="danger"
           @click="handleDelete(scope.row)">删除</el-button>
+
       </template>
     </el-table-column>
   </el-table>
+        <el-dialog
+    title="提示"
+    :visible.sync="messageVisible"
+    width="30%">
+    <span>课程信息</span>
+    <span>{{tableDataUpdata.message}}</span>
 
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="messageVisible = false">确 定</el-button>
+    </span>
+  </el-dialog>
     <el-dialog
     title="提示"
     :visible.sync="dialogVisible"
@@ -74,6 +88,7 @@
         tableData: '',
         tableDataUpdata: '',
         dialogVisible: false,
+        messageVisible: false,
         postdata: {
           inputtime:'',
           inputbanji: '',
@@ -82,6 +97,16 @@
       }
     },
     methods: {
+      handleMessage(index, row) {
+        this.messageVisible = true
+        this.$axios({
+          url:'/banjia/update/get',
+          method: 'post',
+          data: {id: row.id}
+        }).then( result => {
+          this.tableDataUpdata = result.data[0]
+        })
+      },
       handleEdit(index, row) {
         this.dialogVisible = true
         
@@ -115,6 +140,7 @@
         })
       },
       hanleadd() {
+        if(this.postdata.inputtime && this.postdata.inputbanji && this.postdata.inputxueke) {
         this.$axios({
           url:'/banjia/add',
           method: 'post',
@@ -123,6 +149,9 @@
           this.$message(result)
           this.handleHuoqu()
         })
+        } else {
+          this.$message('数据不能为空')
+        }
 
       },
       handleHuoqu() {
