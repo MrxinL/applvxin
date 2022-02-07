@@ -49,9 +49,10 @@ export default new Router({
             },{
                 path:'mybanji',
                 component:()=>import('./views/banji')
-            }
-            
-
+            },{
+                path:'achievementShow',
+                component:()=>import('./views/yeji')
+            },
         
         ]
         }
