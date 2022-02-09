@@ -52,6 +52,9 @@ export default new Router({
             },{
                 path:'achievementShow',
                 component:()=>import('./views/yeji')
+            },{
+                path:'achievementFind',
+                component:()=>import('./views/yejichaxun')
             },
         
         ]
