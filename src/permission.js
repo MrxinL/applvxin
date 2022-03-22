@@ -8,7 +8,6 @@ router.beforeEach(function(to,from,next){
   nprogress.start()  //开启进度条
   if(to.path.startsWith('/home')){
     const token = window.localStorage.getItem('user-token')
-    console.log(token);
     if(token){
       next()
     }else{

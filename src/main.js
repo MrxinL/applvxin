@@ -8,7 +8,7 @@ import axios from './utils/axios.config'
 import  Conponent from './components/index.js'
 
 
-axios.defaults.baseURL ='http://localhost:3000'
+// axios.defaults.baseURL ='http://localhost:3000'
 Vue.prototype.$axios =axios  //全局使用
 
 Vue.use(Element)

@@ -55,6 +55,13 @@ export default new Router({
             },{
                 path:'achievementFind',
                 component:()=>import('./views/yejichaxun')
+            },{
+                path:'guanliyuan',
+                component:()=>import('./views/guanliyuan')
+            },
+            {
+                path:'guanlipingding',
+                component:()=>import('./views/guanlipingding')
             },
         
         ]
