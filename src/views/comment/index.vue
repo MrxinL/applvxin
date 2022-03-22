@@ -75,7 +75,6 @@ export default {
         },
 
             changePage(newPage){
-              //console.log(newPage)
             this.page.page = newPage
              this.getComments()
             },
