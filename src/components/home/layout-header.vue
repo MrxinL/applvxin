@@ -56,11 +56,11 @@ return {
 
 
       getUserInfo(){
+        const token = window.localStorage.getItem('user-token')
         this.$axios({
-          url:'/user/profile'
+          url:'/user/profile',
+          params: {'token': token}
         }).then(result =>{
-
-          // console.log(result.data.data)
           this.userInfo=result.data
         })
       }
