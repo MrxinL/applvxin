@@ -81,9 +81,9 @@ export default {
           this.loading=false
           eventsBus.$emit('updateuserinfo')
           this.getUserInfo()
-
         })
-      },saveUserInfo(){
+      },
+      saveUserInfo(){
             this.$refs.userForm.validate((isok)=>{
               if(isok){
                 this.$axios({
@@ -100,8 +100,11 @@ export default {
             })
       },
       getUserInfo(){
+        const token = window.localStorage.getItem('user-token')
         this.$axios({
-          url:'/user/profile'
+          url:'/user/profile',
+          method: 'get',
+          params: {'token': token}
         }).then(result=>{
           this.userInfo = result.data
         })
