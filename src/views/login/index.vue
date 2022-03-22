@@ -2,7 +2,7 @@
   <div class="login">
     <el-card class="login-card">
       <div class="logo">
-        <img src="../../assets/logo_index.png" alt="图片加载失败" />
+        <!-- <img src="../../assets/logo_index.png" alt="图片加载失败" /> -->
       </div>
       <!-- 表单 -->
 
@@ -21,9 +21,8 @@
         <el-form-item prop="code">
           <el-input
             v-model="loginForm.code"
-            placeholder="请输入验证码"
+            placeholder="请输入密码"
           ></el-input>
-          <el-button style="float: right">发送验证码</el-button>
         </el-form-item>
 
         <el-form-item prop="check">
@@ -111,8 +110,6 @@ export default {
              window.localStorage.setItem('user-token',result.data.token)
            //编程式导航
            this.$router.push('/')
-           
-           
            })
         }
         else {
