@@ -32,8 +32,10 @@ return {
 },
   methods:{
       getUserInfo(){
+        const token = window.localStorage.getItem('user-token')
         this.$axios({
-          url:'/user/profile'
+          url:'/user/profile',
+          params: {'token': token}
         }).then(result =>{
           this.userInfo=result.data
         })
