@@ -22,15 +22,15 @@
       </el-table-column>
       <el-table-column label="购买课程" width="180">
         <template slot-scope="scope">
-          <span style="margin-left: 10px">{{ scope.row.value }}</span>
+          <span style="margin-left: 10px">{{ scope.row.xueke }}</span>
         </template>
       </el-table-column>
 
       <el-table-column label="操作">
         <el-button size="mini" @click="handleisopne">发起申诉</el-button>
-        <el-button size="mini" type="danger" @click="openjilu = true"
+        <!-- <el-button size="mini" type="danger" @click="openjilu = true"
           >申诉记录</el-button
-        >
+        > -->
       </el-table-column>
     </el-table>
     <el-dialog
