@@ -75,12 +75,12 @@ export default {
         code:[
         {
           required:true,
-          message:'验证码错误'
+          message:'密码错误'
 
         },
         {
-          pattern:/^\d{6}$/,
-          message:'格式错误,请输入6位数验证码'
+          // pattern:/^\d{6}$/,
+          message:'格式错误,请输入密码'
         }
         ],
         check:[
