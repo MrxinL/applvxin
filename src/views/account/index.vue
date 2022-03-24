@@ -45,6 +45,7 @@ export default {
         loading:false,
         defaultImg:require('../../assets/default-cover.jpg'),
         userInfo:{
+          id: '',
           name:'',
           intro:'',
           email:'',
@@ -75,8 +76,8 @@ export default {
         this.$axios({
           url:'/user/photo',
           method:'patch',
+          params: { 'id': this.userInfo.id},
           data
-          
         }).then(()=>{
           this.loading=false
           eventsBus.$emit('updateuserinfo')
