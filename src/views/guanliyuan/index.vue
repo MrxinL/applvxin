@@ -14,14 +14,14 @@
           <el-button size="mini" type="danger" @click="handleAgree(scope.row)"
             >同意</el-button
           >
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+          <el-button size="mini" @click="handleoppose(scope.row)"
             >驳回</el-button
           >
         </template>
       </el-table-column>
     </el-table>
     <div v-if="ishow">
-        <span>申诉原因:{{this.pandingData.yuanyin}}</span>
+      <span>申诉原因:{{ this.pandingData.yuanyin }}</span>
     </div>
   </div>
 </template>
@@ -39,33 +39,42 @@ export default {
         yuanyin: "",
         Xid: "",
         Yid: "",
-        sstoken: ""
+        sstoken: "",
       },
       pandingData: {
-          name: "",
-          yuanyin: "",
-          sstoken: ""
+        name: "",
+        yuanyin: "",
+        sstoken: "",
       },
-      ishow: false
+      ishow: false,
     };
   },
   methods: {
+    handleoppose(row) {
+      this.$axios({
+        url: "/yeji/oppose",
+        method: "post",
+        data: { id: row.id},
+      }).then((result) => {
+        this.$message(result);
+        this.handleHuoqu();
+      });
+    },
     handleAgree(row) {
-        let sstoken =""
-        for(var i = 0; i<this.shenSuData.length; i++) {
-            if(row.id == this.shenSuData[i].id){
-                sstoken = this.shenSuData[i].sstoken;
-                break;
-            }
+      let sstoken = "";
+      for (var i = 0; i < this.shenSuData.length; i++) {
+        if (row.id == this.shenSuData[i].id) {
+          sstoken = this.shenSuData[i].sstoken;
+          break;
         }
+      }
       this.$axios({
         url: "/yeji/agree",
         method: "post",
-        data: {id: row.id, sstoken}
+        data: { id: row.id, sstoken },
       }).then((result) => {
-          this.$message(result)
-          this.handleHuoqu();
-
+        this.$message(result);
+        this.handleHuoqu();
       });
     },
     getUserInfo() {
