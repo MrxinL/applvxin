@@ -87,16 +87,20 @@ export default {
       });
     },
     handleAdduser() {
-      const date = +new Date();
-      const token = "ey9.mLitrKsn4E4KdtC8jU" + date;
-      this.$axios({
-        url: "/registers",
-        method: "post",
-        data: { ...this.formLabelAlign, token: token },
-      }).then((result) => {
-        this.$message(result);
-      });
-    this.handleGetJuese();
+      if (this.formLabelAlign.name && this.formLabelAlign.mobile) {
+        const date = +new Date();
+        const token = "ey9.mLitrKsn4E4KdtC8jU" + date;
+        this.$axios({
+          url: "/registers",
+          method: "post",
+          data: { ...this.formLabelAlign, token: token },
+        }).then((result) => {
+          this.$message(result);
+        });
+        this.handleGetJuese();
+      } else {
+          this.$message("数据不能为空");
+      }
     },
     handleGetJuese() {
       this.$axios({
