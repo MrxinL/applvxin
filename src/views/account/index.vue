@@ -25,6 +25,10 @@
         <el-input v-model="userInfo.email" >
         </el-input>
       </el-form-item>
+      <el-form-item label="密码" prop="password"  style="width:300px">
+        <el-input v-model="userInfo.password" >
+        </el-input>
+      </el-form-item>
         <el-form-item label="手机号" style="width:300px">
           <el-input v-model="userInfo.mobile"  disabled >
           </el-input>
@@ -50,7 +54,8 @@ export default {
           intro:'',
           email:'',
           photo:'',
-          mobile:''
+          mobile:'',
+          password: ''
         },
         userRules:{
           name:[{
